@@ -51,9 +51,10 @@ class HomeVC: UIViewController{
     }
     
     func loadTask(){
-        task = []
         
-        db.collection("Tasks").getDocuments { (querySnapshot, error) in
+        
+        db.collection("Tasks").addSnapshotListener { (querySnapshot, error) in
+            self.task = []
             if let e = error{
                 print("Error REtriving Data \(e)")
             }
