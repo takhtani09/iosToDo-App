@@ -6,22 +6,35 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeVC: UIViewController{
     
     var tblData = ["skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb"]
     
     @IBOutlet weak var tblView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tblView.delegate = self
         tblView.dataSource = self
         
-        //tblView.txtNotes
-       
-
+        navigationItem.hidesBackButton = true
     }
+    
+    @IBAction func logOut(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            navigationController?.popViewController(animated: true)
+        }
+        catch let logOutError as NSError{
+            print("Error loging Out: %@", logOutError)
+        }
+        
+    }
+    
 }
 
 
