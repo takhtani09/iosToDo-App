@@ -49,7 +49,7 @@ class RegisterVC: UIViewController {
             
             // User registration successful
             print("User registered successfully: \(user.uid)")
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
