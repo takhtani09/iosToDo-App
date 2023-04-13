@@ -42,7 +42,8 @@ class HomeVC: UIViewController{
     @IBAction func logOut(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            navigationController?.popViewController(animated: true)
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         catch let logOutError as NSError{
             print("Error loging Out: %@", logOutError)
