@@ -52,13 +52,14 @@ class HomeVC: UIViewController{
     
     func loadTask(){
         
-        
-        db.collection("Tasks").addSnapshotListener { (querySnapshot, error) in
-            self.task = []
+        let userId = Auth.auth().currentUser?.uid
+        db.collection(userId!).addSnapshotListener { (querySnapshot, error) in
+            
             if let e = error{
                 print("Error REtriving Data \(e)")
-            }
+            }//data["context"] as? String
             else{
+                self.task = []
                 if let snapShotDocuments = querySnapshot?.documents{
                     for doc in snapShotDocuments{
                         let data = doc.data()

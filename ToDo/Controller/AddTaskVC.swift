@@ -29,10 +29,10 @@ class AddTaskVC: UIViewController {
         } else if let context = txtContext.text, context.isEmpty {
             print("Please enter some content.")
         } else {
-            if let title = txtTitle.text, let context = txtContext.text, let sender = Auth.auth().currentUser?.email{
+            if let title = txtTitle.text, let context = txtContext.text, let sender = Auth.auth().currentUser?.email,let userId = Auth.auth().currentUser?.uid{
                 
-                db.collection("Tasks").addDocument(data: ["sender": sender, "title":
-                                                            title, "context":context,"isCompleted": false]) { (error) in
+                db.collection(userId).addDocument(data: ["sender": sender, "title":
+                                                            title,"date": Date().timeIntervalSince1970, "context":context,"isCompleted": false]) { (error) in
                     if let e = error{
                         print("Issue Saving data \(e)")
                     }
