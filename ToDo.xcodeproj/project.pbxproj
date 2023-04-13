@@ -15,6 +15,8 @@
 		EC7F2C4829E57B9D00F985A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7F2C4629E57B9D00F985A2 /* Main.storyboard */; };
 		EC7F2C4A29E57BA100F985A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7F2C4929E57BA100F985A2 /* Assets.xcassets */; };
 		EC7F2C4D29E57BA100F985A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7F2C4B29E57BA100F985A2 /* LaunchScreen.storyboard */; };
+		EC8CA91E29E7D3BA00C35AEA /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CA91D29E7D3BA00C35AEA /* AddTaskVC.swift */; };
+		EC91734129E7FFB000C7E95D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91734029E7FFB000C7E95D /* Task.swift */; };
 		EC99643A29E68B5200897F90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99643929E68B5200897F90 /* RegisterVC.swift */; };
 		EC99643C29E68F1A00897F90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC99643B29E68F1A00897F90 /* GoogleService-Info.plist */; };
 		EC99645429E6B39200897F90 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99645329E6B39200897F90 /* LoginVC.swift */; };
@@ -30,6 +32,8 @@
 		EC7F2C4929E57BA100F985A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC7F2C4C29E57BA100F985A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC7F2C4E29E57BA100F985A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC8CA91D29E7D3BA00C35AEA /* AddTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
+		EC91734029E7FFB000C7E95D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EC99643929E68B5200897F90 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		EC99643B29E68F1A00897F90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC99645329E6B39200897F90 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 				EC99645329E6B39200897F90 /* LoginVC.swift */,
 				ECC2B24429E6D54D009BEE1B /* TBVCell.swift */,
 				ECC2B24629E6D613009BEE1B /* HomeVC.swift */,
+				EC8CA91D29E7D3BA00C35AEA /* AddTaskVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 		EC99643829E68AB600897F90 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EC91734029E7FFB000C7E95D /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,8 +196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC91734129E7FFB000C7E95D /* Task.swift in Sources */,
 				ECC2B24529E6D54D009BEE1B /* TBVCell.swift in Sources */,
 				EC99643A29E68B5200897F90 /* RegisterVC.swift in Sources */,
+				EC8CA91E29E7D3BA00C35AEA /* AddTaskVC.swift in Sources */,
 				EC7F2C4129E57B9D00F985A2 /* AppDelegate.swift in Sources */,
 				ECC2B24729E6D613009BEE1B /* HomeVC.swift in Sources */,
 				EC99645429E6B39200897F90 /* LoginVC.swift in Sources */,
