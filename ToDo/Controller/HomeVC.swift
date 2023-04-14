@@ -8,9 +8,8 @@
 import UIKit
 import Firebase
 
-class HomeVC: UIViewController{
+class HomeVC: UIViewController, TBVCellDelegate{
     
-    var tblData = ["skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb","skdnckl", "lsdjckjb", "ksjdb", "ksdjb"]
     let db = Firestore.firestore()
     
     var task : [Task] = []
@@ -28,15 +27,38 @@ class HomeVC: UIViewController{
         loadTask()
     }
     
+    func editTask(for cell: TBVCell) {
+        
+        guard let indexPath = tblView.indexPath(for: cell) else { return }
+        print("clicked")
+        
+        let task = self.task[indexPath.row]
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "AddTaskVC") as! AddTaskVC
+        
+        
+
+        
+        VC.tTitle = task.title
+        VC.cContext = task.context
+        VC.dDate = task.date
+        
+        VC.modalPresentationStyle = .overFullScreen
+        VC.sheetPresentationController?.prefersGrabberVisible = true
+        self.present(VC, animated: true)
+    }
+    
     
     
     @IBAction func btnAdd(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-          let VC = storyboard.instantiateViewController(withIdentifier: "AddTaskVC") as! AddTaskVC
-          VC.modalPresentationStyle = .overFullScreen  // for fullscreen
-         //VC.sheetPresentationController?.detents = [.medium(),.large()] // for half and full screen
-         VC.sheetPresentationController?.prefersGrabberVisible = true
-          self.present(VC, animated: true)
+        let VC = storyboard.instantiateViewController(withIdentifier: "AddTaskVC") as! AddTaskVC
+        
+        VC.modalPresentationStyle = .overFullScreen
+        VC.sheetPresentationController?.prefersGrabberVisible = true
+        self.present(VC, animated: true)
     }
     
     @IBAction func logOut(_ sender: Any) {
@@ -54,7 +76,7 @@ class HomeVC: UIViewController{
     func loadTask(){
         
         let userId = Auth.auth().currentUser?.uid
-        db.collection(userId!).addSnapshotListener { (querySnapshot, error) in
+        db.collection(userId!).order(by: "date").addSnapshotListener { (querySnapshot, error) in
             
             if let e = error{
                 print("Error REtriving Data \(e)")
@@ -64,8 +86,8 @@ class HomeVC: UIViewController{
                 if let snapShotDocuments = querySnapshot?.documents{
                     for doc in snapShotDocuments{
                         let data = doc.data()
-                        if let taskContext = data["context"] as? String, let tasktTitle = data["title"] as? String, let taskIsCompleted = data["isCompleted"] as? Bool, let taskSetter = data["sender"] as? String{
-                            let newTask = Task(sender: taskSetter, title: tasktTitle, context: taskContext, isCompleted: taskIsCompleted)
+                        if let taskContext = data["context"] as? String, let tasktTitle = data["title"] as? String, let taskIsCompleted = data["isCompleted"] as? Bool, let taskSetter = data["sender"] as? String,let date = data["date"] as? Double{
+                            let newTask = Task(sender: taskSetter, title: tasktTitle, context: taskContext, isCompleted: taskIsCompleted, date: date)
                             self.task.append(newTask)
                             
                             DispatchQueue.main.async {
@@ -85,12 +107,26 @@ extension HomeVC :  UITableViewDelegate, UITableViewDataSource {
         return task.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tsk = task[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! TBVCell
         
-        cell.txtNotes.text = tsk.context
+        cell.delegate = self
+        
+        cell.txtTitle.text = tsk.title
+        cell.txtContext.text = tsk.context
+        
+        if tsk.isCompleted{
+            cell.btnStatus.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+            cell.btnStatus.tintColor = UIColor.green
+        }
+        else{
+            cell.btnStatus.setImage(UIImage(systemName: "hand.thumbsdown.fill"), for: .normal)
+            cell.btnStatus.tintColor = UIColor.red
+        }
+        
         return cell
     }
 }

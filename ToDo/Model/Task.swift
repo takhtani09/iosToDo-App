@@ -12,4 +12,5 @@ struct Task{
     let title : String
     let context : String
     let isCompleted : Bool
+    let date : Double
 }
