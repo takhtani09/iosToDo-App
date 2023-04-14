@@ -10,6 +10,8 @@ import Firebase
 
 class HomeVC: UIViewController, TBVCellDelegate{
     
+    
+    
     let db = Firestore.firestore()
     
     var task : [Task] = []
@@ -27,10 +29,52 @@ class HomeVC: UIViewController, TBVCellDelegate{
         loadTask()
     }
     
+    func dltTask(for cell: TBVCell) {
+        guard let indexPath = tblView.indexPath(for: cell) else { return }
+        let task = self.task[indexPath.row]
+        
+        let id = Auth.auth().currentUser?.uid
+
+        let db = Firestore.firestore()
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("No authenticated user")
+            return
+        }
+        let tasksCollection = db.collection(userId)
+            .whereField("date", isEqualTo: task.date)
+
+        // Retrieve the task document from Firestore
+        tasksCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                guard let snapshot = querySnapshot else {
+                    print("No matching documents")
+                    return
+                }
+                if snapshot.documents.count == 1 {
+                    let document = snapshot.documents[0]
+                    
+                    // Delete the task document from Firestore
+                    document.reference.delete() { err in
+                        if let err = err {
+                            print("Error deleting document: \(err)")
+                        } else {
+                            print("Document successfully deleted")
+                            self.tblView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+    
     func editTask(for cell: TBVCell) {
         
         guard let indexPath = tblView.indexPath(for: cell) else { return }
-        print("clicked")
+        
         
         let task = self.task[indexPath.row]
         

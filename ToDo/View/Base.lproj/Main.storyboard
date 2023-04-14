@@ -316,7 +316,7 @@
         <!--RegisterVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RegisterVC" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="RegisterVC" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -588,6 +588,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="Register">
                                                     <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="goToREgister:" destination="ab7-XO-mqR" eventType="touchUpInside" id="RF3-Q2-oBh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -625,7 +628,13 @@
                             <constraint firstItem="PPw-eP-eX4" firstAttribute="top" secondItem="c70-e8-4Jr" secondAttribute="top" id="wgh-MQ-fsw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pMJ-Jd-lZ5"/>
+                    <navigationItem key="navigationItem" id="pMJ-Jd-lZ5">
+                        <barButtonItem key="leftBarButtonItem" id="Q4c-8T-h90">
+                            <connections>
+                                <action selector="goToREgister:" destination="ab7-XO-mqR" id="KFL-uu-DnW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="txtPassword" destination="Cnw-qt-pN5" id="mQR-MD-STl"/>
                         <outlet property="txtUsername" destination="52e-FH-wu4" id="QaL-Q8-2iQ"/>

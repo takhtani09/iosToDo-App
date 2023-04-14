@@ -49,4 +49,9 @@ class LoginVC: UIViewController {
         present(alert, animated: true)
     }
 
+    @IBAction func goToREgister(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegisterVC") as! RegisterVC
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

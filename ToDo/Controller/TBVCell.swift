@@ -11,6 +11,7 @@ import SwiftUI
 
 protocol TBVCellDelegate: AnyObject {
     func editTask(for cell: TBVCell)
+    func dltTask(for cell: TBVCell)
 }
 
 class TBVCell: UITableViewCell {
@@ -93,6 +94,7 @@ class TBVCell: UITableViewCell {
     }
     
     @IBAction func btnDelete(_ sender: UIButton) {
+        delegate?.dltTask(for: self)
     }
     
 }
